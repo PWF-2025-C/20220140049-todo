@@ -59,6 +59,15 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 ## Security Vulnerabilities
 
+
+# screenshot tugas
+| Halaman              | Screenshot                                   |                                                |
+|----------------------|----------------------------------------------|--------------------------------------------------------|
+| terminal install breeze        |   ![installbreeze](https://github.com/user-attachments/assets/2db8e03c-9114-4c89-9013-3934af649a4f) |      |
+| routes/web.php        | ![web php](https://github.com/user-attachments/assets/d08e2269-c15d-4b65-8fac-2b995f3d58a4)|      |
+| link web url http://20220140049-todo.test/dashboard        | ![link web dengan halaman namalengkap](https://github.com/user-attachments/assets/5b344838-2f22-4053-9524-7f0f29b1153d)|      |
+| database       |  ![database](https://github.com/user-attachments/assets/f89b4079-dde3-48a7-a1ab-3c2865c87c1b) |      |
+|----------------------|----------------------------------------------|--------------------------------------------------------|
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
