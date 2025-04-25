@@ -9,10 +9,24 @@ class UserController extends Controller
 {
     //
 
-    public function index(){
-        $user = User::all();
-    // $todos = Todo::where('user_id', Auth::id())->get();
-    dd($user);
-        return view('user.index');
+    public function index() {
+        $search = request('search');
+        
+        if ($search) {
+            $users = User::where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            })
+            ->orderBy('name')
+            ->where('id', '!=', 1)
+            ->paginate(20)
+            ->withQueryString();
+        } else {
+            $users = User::where('id', '!=', 1)
+                ->orderBy('id')
+                ->paginate(10);
+        }
+        
+        return view('user.index', compact('users'));
     }
 }
