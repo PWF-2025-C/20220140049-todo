@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Create Todo') }}
+            {{ __('Create Category') }}
         </h2>
     </x-slot>
 
@@ -9,33 +9,23 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('todo.store') }}">
+
+                    <!-- FORM -->
+                    <form method="POST" action="{{ route('category.store') }}"> {{-- diperbaiki --}}
                         @csrf
 
-                        <!-- Title -->
+                        <!-- INPUT TITLE KATEGORI -->
                         <div class="mb-6">
-                            <x-input-label for="title" :value="__('Title')" />
+                            <x-input-label for="title" :value="__('Category Title')" />
                             <x-text-input id="title" name="title" type="text" class="block w-full mt-1"
-                                required autofocus autocomplete="title" />
+                                required autofocus autocomplete="title" placeholder="Enter category title" />
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
 
-                        <!-- Category Dropdown -->
-                        <div class="mb-6">
-                            <x-input-label for="category_id" :value="__('Category')" />
-                            <x-select id="category_id" name="category_id">
-                                <option value="">Empty</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
-                                @endforeach
-                            </x-select>
-                            <x-input-error class="mt-2" :messages="$errors->get('category_id')" />
-                        </div>
-
-                        <!-- Buttons -->
+                        <!-- BUTTONS -->
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
-                            <a href="{{ route('todo.index') }}"
+                            <x-primary-button>{{ __('Create') }}</x-primary-button>
+                            <a href="{{ route('category.index') }}"
                                 class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest
                                 text-gray-700 uppercase transition duration-150 ease-in-out
                                 bg-white border border-gray-300 rounded-md shadow-sm dark:bg-gray-800
@@ -46,6 +36,7 @@
                             </a>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

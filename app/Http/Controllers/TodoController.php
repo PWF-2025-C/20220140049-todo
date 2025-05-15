@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Todo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -9,22 +10,25 @@ use Illuminate\Http\Request;
 class TodoController extends Controller
 {
     public function index()
-    {
-        $todos = Todo::where('user_id', Auth::user()->id)
-            ->orderBy('is_done', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->get();
+{
+    $todos = Todo::with('category') // memuat relasi category
+        ->where('user_id', Auth::id())
+        ->orderBy('is_done', 'asc')
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        $todosCompleted = Todo::where('user_id', Auth::user()->id)
-            ->where('is_done', true)
-            ->count();
+    $todosCompleted = $todos->where('is_done', true)->count();
 
-        return view('todo.index', compact('todos', 'todosCompleted'));
-    }
+    return view('todo.index', compact('todos', 'todosCompleted'));
+}
 
     public function create()
     {
-        return view('todo.create');
+        // Ambil semua kategori
+        $categories = Category::all();
+
+        // Kirim ke view todo.create
+        return view('todo.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -35,6 +39,7 @@ class TodoController extends Controller
 
         $todo = new Todo();
         $todo->title = $request->title;
+        $todo->category_id = $request->category_id ?: null;
         $todo->is_done = false;
         $todo->user_id = Auth::user()->id;
         $todo->save();
