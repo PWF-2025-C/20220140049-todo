@@ -47,7 +47,9 @@ Route::patch('/user/{user}/makeadmin', [UserController::class, 'makeadmin'])->na
 Route::patch('/user/{user}/removeadmin', [UserController::class, 'removeadmin'])->name('user.removeadmin');
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
-
+Route::get('/pzn', function (){
+    return "Hello Programmer Zaman Now";
+});
 
 // Route::resource('todo', TodoController::class)->except(['show']);
 
