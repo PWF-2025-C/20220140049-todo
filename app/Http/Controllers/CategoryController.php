@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     Category::create([
         'title' => $request->title,
-        'user_id' => auth()->id(), // WAJIB, karena schema mengharuskan user_id
+        'user_id' => auth()->id(), 
     ]);
 
     return redirect()->route('category.index')->with('success', 'Kategori berhasil ditambahkan.');
