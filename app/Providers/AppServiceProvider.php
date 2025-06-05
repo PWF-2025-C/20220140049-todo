@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Dedoc\Scramble\Scramble;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Illuminate\Routing\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Tambahkan registrasi service jika diperlukan
     }
 
     /**
@@ -21,11 +24,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Gunakan Tailwind untuk pagination
         Paginator::useTailwind();
-        Gate::define('admin',function($user){
+
+        // Definisikan Gate untuk admin
+        Gate::define('admin', function ($user) {
             return $user->is_admin == true;
         });
-    }
 
-    
+        // Konfigurasi Scramble untuk dokumentasi hanya pada route 'api/*'
+        Scramble::configure()->routes(function (Route $route) {
+            return Str::startsWith($route->uri(), 'api/');
+        });
+    }
 }
